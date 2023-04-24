@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="https://assets.bux.osu.edu/v0.8.2/css/bux-styles.min.css"/>
+    <link rel="stylesheet" href="https://assets.bux.osu.edu/bux-webfonts/bux-webfonts.css" />
+    <link rel="icon" href="https://bux.osu.edu/img/favicon.ico"/>
+    <style>
+        .errorHelperText{
+            display: none; 
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<!--	 Header Navigation Bar		-->
+<div id="osu-navbar" class="bux-osu-nav" role="navigation">
+    <div class="bux-osu-nav__overlay"></div>
+    <div class="bux-osu-nav__wrapper">
+        <h2 class="visually-hidden">Ohio State navigation bar</h2>
+        <div class="bux-container">
+            <div id="osu-navname-block">
+                <!-- Header image with OSU link -->
+                <a class="bux-osu-nav__osu-logo-link" href="https://osu.edu">
+                    <img class="bux-osu-nav__osu-logo-img" src="https://www.osu.edu/images/osu-logo-horizontal.svg" alt="The Ohio State University" />
+                </a>
+            </div>
+            <div id="osu-navlinks-block">
+                <button type="button" id="osu-nav-trigger" aria-haspopup="true" aria-controls="osu-navlinks" aria-expanded="false">
+                    <span class="visually-hidden">Show Links</span>
+                </button>
+                <ul id="osu-navlinks" role="menu" aria-labelledby="osu-nav-trigger" class="bux-osu-nav__links">
+                    <li class="bux-osu-nav__link" role="none"><a href="https://www.osu.edu/map" role="menuitem">Map</a></li>
+                    <li class="bux-osu-nav__link" role="none"><a href="http://buckeyelink.osu.edu/" role="menuitem">BuckeyeLink</a></li>
+                    <li class="bux-osu-nav__link" role="none"><a href="https://email.osu.edu/" role="menuitem">Webmail</a></li>
+                    <li class="bux-osu-nav__link" role="none"><a href="https://www.osu.edu/search/" role="menuitem">Search Ohio State</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form -->
+<form class="bux-container">
+    <div class="bux-pad-all-sp-16">
+        <label class="bux-form__label" for="textInput">First Name:</label>
+        <input id="firstNameInput" class="bux-form__text-field" placeholder="Please input your first name" />
+        <span class="bux-form__text-field--error__message errorHelperText">First name does not match</span>
+
+        <label class="bux-form__label" for="textInput">Last Name:</label>
+        <input id="lastNameInput" class="bux-form__text-field" placeholder="Please input your last name" />
+        <span class="bux-form__text-field--error__message errorHelperText">Last name does not match</span>
+
+        <label class="bux-form__label" for="textInput">Last Name.#:</label>
+        <input id="OSUNameInput" class="bux-form__text-field" placeholder="Please input your osu name" />
+        <span class="bux-form__text-field--error__message errorHelperText">OSU name does not match</span>
+
+
+        <button type="button" class="bux-button--alt" onclick="validateInput()">Submit</button>
+    </div>
+</form>
+
+    <script src="https://assets.bux.osu.edu/v0.8.2/js/bux.min.js"></script>
+    <script>
+
+        function validateInput() {
+            const OSUNameInput = document.getElementById('OSUNameInput');
+            const firstNameInput= document.getElementById('firstNameInput');
+            const lastNameInput = document.getElementById('lastNameInput');
+
+            const errorHelperText = document.getElementsByClassName('errorHelperText');
+
+            var isError = false;
+            if (firstNameInput.value.toLowerCase() !== 'junwei') {
+                firstNameInput.classList.add('bux-form__text-field--error');
+                errorHelperText[0].style.display = 'block';
+                isError = true;
+                setTimeout(function() {
+                    alert('Submission failure, First name does not match')
+                },1000);
+            }
+            if (lastNameInput.value.toLowerCase() !== 'zhang') {
+                lastNameInput.classList.add('bux-form__text-field--error');
+                errorHelperText[1].style.display = 'block';
+                isError = true;
+                setTimeout(function() {
+                    alert('Submission failure, Last name does not match')
+                },1000);
+            }
+            if (OSUNameInput.value.toLowerCase() !== 'zhang.13269') {
+                OSUNameInput.classList.add('bux-form__text-field--error');
+                errorHelperText[2].style.display = 'block';
+                isError = true;
+                setTimeout(function() {
+                    alert('Submission failure, OSU name does not match')
+                },1000);
+            } 
+            //if no error message
+            if (!isError){
+                OSUNameInput.classList.remove('bux-form__text-field--error');
+                firstNameInput.classList.remove('bux-form__text-field--error');
+                lastNameInput.classList.remove('bux-form__text-field--error');
+                for(let i = 0; i < errorHelperText.length;i++){
+                    errorHelperText[i].style.display = 'none';
+                }
+                setTimeout(function() {
+                    alert('Form submitted successfully!\n' +
+                    firstNameInput.value + '\n' +
+                    lastNameInput.value + '\n' +
+                    OSUNameInput.value + '\n')
+                },1000);
+            }
+                
+            
+        }
+        
+    </script>
+</body>
+</html>
